@@ -9,10 +9,10 @@ module.exports = {
       filename: path.join(__dirname, 'dev.sqlite3')
     },
     migrations: {
-      filename: path.join(__dirname, 'migrations')
+      directory: path.join(__dirname, 'migrations')
     },
     seeds: {
-      filename: path.join(__dirname, 'seeds')
+      directory: path.join(__dirname, 'seeds')
     }
   },
 
@@ -23,10 +23,10 @@ module.exports = {
       filename: ':memory:'
     },
     migrations: {
-      filename: path.join(__dirname, 'migrations')
+      directory: path.join(__dirname, 'migrations')
     },
     seeds: {
-      filename: path.join(__dirname, 'seeds')
+      directory: path.join(__dirname, 'seeds')
     }
   },
 
