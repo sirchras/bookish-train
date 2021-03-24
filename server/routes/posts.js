@@ -11,5 +11,7 @@ router.get('/', (req, res) => {
     .then(posts => {
       return res.json({ posts })
     })
-    .catch(err => console.error)
+    .catch(err => {
+      console.error(err)
+    })
 })
