@@ -1,4 +1,6 @@
 # bookish-train
+[![Node.js CI](https://github.com/sirchras/bookish-train/actions/workflows/node.js.yml/badge.svg)](https://github.com/sirchras/bookish-train/actions/workflows/node.js.yml)
+
 A simple, poorly-named status posting site
 
 ## MVP 1:
