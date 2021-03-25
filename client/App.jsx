@@ -1,8 +1,10 @@
 import React from 'react'
 
+import Feed from './components/Feed/Feed'
+
 function App () {
   return (
-    <h1>React Boilerplate</h1>
+    <Feed />
   )
 }
 
