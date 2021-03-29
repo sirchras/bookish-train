@@ -80,7 +80,10 @@ const GlobalStyles = createGlobalStyle`
   }
 
   /* ADD GLOBAL STYLES HERE */
-
+  body {
+    font-family: sans-serif;
+    font-size: 16px;
+  }
 `
 
 export default GlobalStyles
