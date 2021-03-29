@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import hash from 'hash-string'
 
 import { fetchPosts } from './postsSlice'
+import Post from './Post'
 
 function Feed () {
   const { posts } = useSelector(state => state.posts)
@@ -16,11 +17,7 @@ function Feed () {
     <>
       {
         posts.map(post => (
-          <article key={hash(post.status)}>
-            <h2>{post.user}</h2>
-            <img src='https://via.placeholder.com/150'/>
-            <p>{post.status}</p>
-          </article>
+          <Post key={hash(post.status)} post={post}/>
         ))
       }
     </>
