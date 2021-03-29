@@ -25,6 +25,10 @@ function getPost (id, db = connection) {
 
 function addNewPost ({ status, userId }, db = connection) {
   return db('posts')
-    .insert({ status, user_id: userId }, 'id')
+    .insert({
+      status,
+      user_id: userId,
+      created_at: new Date(Date.now())
+    }, 'id')
     .then(id => getPost(id, db))
 }
