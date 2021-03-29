@@ -2,8 +2,10 @@ const request = require('supertest')
 
 const server = require('../server')
 const db = require('../db/posts')
+const logger = require('../logger')
 
 jest.mock('../db/posts')
+jest.mock('../logger')
 
 const mockPosts = [
   {
@@ -35,7 +37,7 @@ describe('GET /api/v1/posts', () => {
       })
   })
 
-  it('reqponds with 500 and error on getAllPosts rejection', () => {
+  it('responds with 500 and error on getAllPosts rejection', () => {
     db.getAllPosts.mockImplementation(() => {
       return Promise.reject(new Error('mock DB error'))
     })
@@ -43,6 +45,7 @@ describe('GET /api/v1/posts', () => {
       .get('/api/v1/posts')
       .expect(500)
       .then(err => {
+        expect(logger.err).toHaveBeenCalledWith('mock DB error')
         expect(err.text).toMatch('internal error')
         return null
       })
@@ -56,14 +59,13 @@ describe('POST /api/v1/posts', () => {
       userId: 1
     }
     expect.assertions(3)
-    db.addNewPost.mockImplementation(({ status, userId }) => {
-      expect(status).toMatch('test')
-      expect(userId).toBe(1)
+    db.addNewPost.mockImplementation(post => {
+      expect(post.status).toMatch('test')
+      expect(post.user_id).toBe(1)
       return Promise.resolve({
+        ...post,
         id: 3,
-        status,
-        created_at: new Date(Date.now()),
-        user_id: userId
+        created_at: new Date(Date.now())
       })
     })
     return request(server)
@@ -84,6 +86,7 @@ describe('POST /api/v1/posts', () => {
       .get('/api/v1/posts')
       .expect(500)
       .then(err => {
+        expect(logger.err).toHaveBeenCalledWith('mock DB error')
         expect(err.text).toMatch('internal error')
         return null
       })
