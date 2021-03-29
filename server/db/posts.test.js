@@ -35,6 +35,7 @@ describe('addNewPost', () => {
         expect(post).toHaveProperty('id')
         expect(post.id).toBe(4)
         expect(post.user_id).toBe(reqBody.userId)
+        expect(post.created_at).toBeTruthy()
         return null
       })
   })
