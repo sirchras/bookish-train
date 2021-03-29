@@ -21,7 +21,7 @@ const mockPosts = [
 ]
 
 describe('GET /api/v1/posts', () => {
-  it('responds with all posts', () => {
+  it('responds with posts array on getAllPosts success', () => {
     db.getAllPosts.mockImplementation(() => {
       return Promise.resolve(mockPosts)
     })
@@ -34,4 +34,11 @@ describe('GET /api/v1/posts', () => {
         return null
       })
   })
+
+  it.todo('reqponds with 500 and error on getAllPosts rejection')
+})
+
+describe('POST /api/v1/posts', () => {
+  it.todo('responds with the new post on addNewPost success')
+  it.todo('responds with 500 and error on addNewPost rejection')
 })

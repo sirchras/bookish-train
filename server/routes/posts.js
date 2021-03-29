@@ -15,3 +15,7 @@ router.get('/', (req, res) => {
       console.error(err)
     })
 })
+
+router.post('/', (req, res) => {
+  res.sendStatus(501)
+})
