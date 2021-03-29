@@ -22,3 +22,21 @@ describe('getAllPosts', () => {
       })
   })
 })
+
+describe('addNewPost', () => {
+  it('returns the new post', () => {
+    const reqBody = {
+      status: 'this is a test!',
+      user_id: 2
+    }
+
+    return db.addNewPost(reqBody, testDb)
+      .then(post => {
+        expect(post).toMatchObject(reqBody)
+        expect(post).toHaveProperty('id')
+        expect(post.id).toBe(4)
+        expect(post.created_at).toBeTruthy()
+        return null
+      })
+  })
+})
