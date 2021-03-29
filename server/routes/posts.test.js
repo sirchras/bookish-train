@@ -50,6 +50,42 @@ describe('GET /api/v1/posts', () => {
 })
 
 describe('POST /api/v1/posts', () => {
-  it.todo('responds with the new post on addNewPost success')
-  it.todo('responds with 500 and error on addNewPost rejection')
+  it('responds with the new post on addNewPost success', () => {
+    const newPost = {
+      status: 'test status',
+      userId: 1
+    }
+    expect.assertions(3)
+    db.addNewPost.mockImplementation(({ status, userId }) => {
+      expect(status).toMatch('test')
+      expect(userId).toBe(1)
+      return Promise.resolve({
+        id: 3,
+        status,
+        created_at: new Date(Date.now()),
+        user_id: userId
+      })
+    })
+    return request(server)
+      .post('/api/v1/posts')
+      .send(newPost)
+      .expect('Content-Type', /json/)
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.status).toBe('test status')
+        return null
+      })
+  })
+  it('responds with 500 and error on addNewPost rejection', () => {
+    db.addNewPost.mockImplementation(() => {
+      return Promise.reject(new Error('mock DB error'))
+    })
+    return request(server)
+      .get('/api/v1/posts')
+      .expect(500)
+      .then(err => {
+        expect(err.text).toMatch('internal error')
+        return null
+      })
+  })
 })
