@@ -35,7 +35,18 @@ describe('GET /api/v1/posts', () => {
       })
   })
 
-  it.todo('reqponds with 500 and error on getAllPosts rejection')
+  it('reqponds with 500 and error on getAllPosts rejection', () => {
+    db.getAllPosts.mockImplementation(() => {
+      return Promise.reject(new Error('mock DB error'))
+    })
+    return request(server)
+      .get('/api/v1/posts')
+      .expect(500)
+      .then(err => {
+        expect(err.text).toMatch('internal error')
+        return null
+      })
+  })
 })
 
 describe('POST /api/v1/posts', () => {
