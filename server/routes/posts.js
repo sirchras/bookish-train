@@ -18,5 +18,13 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  res.sendStatus(501)
+  const post = req.body
+  db.addNewPost(post)
+    .then(newPost => {
+      return res.status(201).json(newPost)
+    })
+    .catch(err => {
+      console.log(err)
+      return res.status(500).send('internal error')
+    })
 })
