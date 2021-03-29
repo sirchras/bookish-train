@@ -27,14 +27,14 @@ describe('addNewPost', () => {
   it('returns the new post', () => {
     const reqBody = {
       status: 'this is a test!',
-      user_id: 2
+      userId: 2
     }
 
     return db.addNewPost(reqBody, testDb)
       .then(post => {
-        expect(post).toMatch(reqBody)
-        expect(post).toHabeProperty('id')
+        expect(post).toHaveProperty('id')
         expect(post.id).toBe(4)
+        expect(post.user_id).toBe(reqBody.userId)
         return null
       })
   })

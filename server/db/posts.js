@@ -1,7 +1,8 @@
 const connection = require('./connection')
 
 module.exports = {
-  getAllPosts
+  getAllPosts,
+  addNewPost
 }
 
 function getAllPosts (db = connection) {
@@ -14,4 +15,16 @@ function getAllPosts (db = connection) {
       'users.id as userId',
       'name as user'
     )
+}
+
+function getPost (id, db = connection) {
+  return db('posts')
+    .where('id', id)
+    .first()
+}
+
+function addNewPost ({ status, userId }, db = connection) {
+  return db('posts')
+    .insert({ status, user_id: userId }, 'id')
+    .then(id => getPost(id, db))
 }
