@@ -1,7 +1,7 @@
 import React from 'react'
 
 import GlobalStyles from './GlobalStyles'
-import Feed from './components/Feed/Feed'
+import Feed from './components/Feed'
 
 function App () {
   return (
