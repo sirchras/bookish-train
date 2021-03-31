@@ -1,12 +1,12 @@
 import React from 'react'
 
 import GlobalStyles from './GlobalStyles'
-import Feed from './components/Feed'
+import Home from './pages/Home'
 
 function App () {
   return (
     <>
-      <Feed />
+      <Home />
       <GlobalStyles />
     </>
   )
