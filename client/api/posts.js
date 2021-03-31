@@ -7,4 +7,10 @@ function getAllPosts () {
     .then(res => res.body.posts)
 }
 
-export default { getAllPosts }
+function addNewPost (post) {
+  return request.post(url)
+    .send(post)
+    .then(res => res.body)
+}
+
+export default { getAllPosts, addNewPost }
