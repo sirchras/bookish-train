@@ -7,7 +7,7 @@ module.exports = {
 
 function getAllPosts (db = connection) {
   return db('posts')
-    .join('users', 'posts.user_id', 'users.id')
+    .join('users', { 'users.id': 'posts.user_id' })
     .select(
       'posts.id as id',
       'status',
