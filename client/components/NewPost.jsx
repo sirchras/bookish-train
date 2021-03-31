@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const Wrapper = styled.form`
@@ -35,11 +35,31 @@ const Submit = styled.button`
 `
 
 function NewPost () {
+  const [status, setStatus] = useState('')
+
+  function onChange (evt) {
+    const { value } = evt.target
+
+    setStatus(value)
+  }
+
+  function onSubmit (evt) {
+    evt.preventDefault()
+
+    console.log('status:', status)
+    setStatus('')
+  }
+
   return (
-    <Wrapper>
-      <Status rows='3' placeholder={'What\'s up?'}/>
+    <Wrapper onSubmit={onSubmit}>
+      <Status
+        rows='3'
+        placeholder={'What\'s up?'}
+        value={status}
+        onChange={onChange}
+      />
       <ButtonPanel>
-        <Submit>Post</Submit>
+        <Submit type='submit'>Post</Submit>
       </ButtonPanel>
     </Wrapper>
   )
