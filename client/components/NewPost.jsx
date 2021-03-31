@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
+import { makePost } from './postsSlice'
 
 const Wrapper = styled.form`
   padding: 16px;
@@ -35,6 +37,7 @@ const Submit = styled.button`
 `
 
 function NewPost () {
+  const dispatch = useDispatch()
   const [status, setStatus] = useState('')
 
   function onChange (evt) {
@@ -46,7 +49,7 @@ function NewPost () {
   function onSubmit (evt) {
     evt.preventDefault()
 
-    console.log('status:', status)
+    dispatch(makePost({ status, userId: 1 }))
     setStatus('')
   }
 
