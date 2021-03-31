@@ -1,6 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { getAllPosts } from '../api/posts'
+import posts from '../api/posts'
+
+// fetchPosts thunk
+const fetchPosts = createAsyncThunk(
+  'posts/fetchPosts',
+  async (api = posts) => {
+    const posts = await api.getAllPosts()
+    return posts
+  }
+)
 
 const postsSlice = createSlice({
   name: 'posts',
@@ -8,28 +17,21 @@ const postsSlice = createSlice({
     loading: 'idle',
     posts: []
   },
-  reducers: {
-    postsLoading: state => {
-      if (state.loading === 'idle') {
-        state.loading = 'pending'
-      }
+  reducers: {},
+  extraReducers: {
+    [fetchPosts.pending]: state => {
+      state.loading = 'pending'
     },
-    postsReceived: (state, action) => {
-      if (state.loading === 'pending') {
-        state.loading = 'idle'
-        state.posts = action.payload
-      }
+    [fetchPosts.fulfilled]: (state, action) => {
+      state.loading = 'idle'
+      state.posts = action.payload
+    },
+    [fetchPosts.rejected]: (state, action) => {
+      state.loading = 'idle'
+      console.error(action)
     }
   }
 })
 
+export { fetchPosts }
 export default postsSlice.reducer
-
-export const { postsLoading, postsReceived } = postsSlice.actions
-
-// fetchPosts thunk
-export const fetchPosts = () => async dispatch => {
-  dispatch(postsLoading())
-  const posts = await getAllPosts()
-  dispatch(postsReceived(posts))
-}
