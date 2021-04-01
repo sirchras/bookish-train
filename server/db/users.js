@@ -18,7 +18,10 @@ function userExists (user, db = connection) {
 }
 
 function getUserByName (user, db = connection) {
-  // todo
+  return db('users')
+    .select()
+    .where('name', user)
+    .first()
 }
 
 function createUser (user, db = connection) {
