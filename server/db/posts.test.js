@@ -14,10 +14,36 @@ beforeEach(() => {
 
 describe('getAllPosts', () => {
   it('returns all posts', () => {
+    const expected = expect.objectContaining({
+      id: expect.any(Number),
+      status: expect.any(String),
+      createdAt: expect.any(String),
+      userId: expect.any(Number),
+      user: expect.any(String)
+    })
     return db.getAllPosts(testDb)
       .then(posts => {
         expect(posts).toHaveLength(3)
-        expect(posts[0].status).toBe('hello world!')
+        posts.forEach(post => {
+          expect(post).toEqual(expected)
+        })
+        return null
+      })
+  })
+})
+
+describe('getPostById', () => {
+  it('returns the post with the matching id', () => {
+    const expected = expect.objectContaining({
+      id: 1,
+      status: expect.any(String),
+      createdAt: expect.any(String),
+      userId: expect.any(Number),
+      user: expect.any(String)
+    })
+    return db.getPostById(1, testDb)
+      .then(post => {
+        expect(post).toEqual(expected)
         return null
       })
   })
@@ -29,7 +55,6 @@ describe('addNewPost', () => {
       status: 'this is a test!',
       user_id: 2
     }
-
     return db.addNewPost(reqBody, testDb)
       .then(post => {
         expect(post).toHaveProperty('id')

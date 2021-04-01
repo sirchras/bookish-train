@@ -2,12 +2,13 @@ const connection = require('./connection')
 
 module.exports = {
   getAllPosts,
+  getPostById,
   addNewPost
 }
 
 function getAllPosts (db = connection) {
   return db('posts')
-    .join('users', 'posts.user_id', 'users.id')
+    .join('users', { 'users.id': 'posts.user_id' })
     .select(
       'posts.id as id',
       'status',
@@ -17,7 +18,7 @@ function getAllPosts (db = connection) {
     )
 }
 
-function getPost (id, db = connection) {
+function getPostById (id, db = connection) {
   return db('posts')
     .join('users', 'posts.user_id', 'users.id')
     .select(
@@ -37,5 +38,5 @@ function addNewPost (post, db = connection) {
       ...post,
       created_at: new Date(Date.now())
     }, 'id')
-    .then(id => getPost(id, db))
+    .then(id => getPostById(id, db))
 }
