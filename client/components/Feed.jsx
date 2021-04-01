@@ -17,7 +17,7 @@ function Feed () {
     <>
       {
         posts.map(post => (
-          <Post key={hash(post.status)} post={post}/>
+          <Post key={hash(JSON.stringify(post))} post={post}/>
         ))
       }
     </>
