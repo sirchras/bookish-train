@@ -32,13 +32,29 @@ describe('getAllPosts', () => {
   })
 })
 
+describe('getPostById', () => {
+  it('returns the post with the matching id', () => {
+    const expected = expect.objectContaining({
+      id: 1,
+      status: expect.any(String),
+      createdAt: expect.any(String),
+      userId: expect.any(Number),
+      user: expect.any(String)
+    })
+    return db.getPostById(1, testDb)
+      .then(post => {
+        expect(post).toEqual(expected)
+        return null
+      })
+  })
+})
+
 describe('addNewPost', () => {
   it('returns the new post', () => {
     const reqBody = {
       status: 'this is a test!',
       user_id: 2
     }
-
     return db.addNewPost(reqBody, testDb)
       .then(post => {
         expect(post).toHaveProperty('id')
