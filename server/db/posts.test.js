@@ -41,10 +41,12 @@ describe('addNewPost', () => {
 
     return db.addNewPost(reqBody, testDb)
       .then(post => {
-        expect(post).toMatchObject(reqBody)
         expect(post).toHaveProperty('id')
         expect(post.id).toBe(4)
-        expect(post.created_at).toBeTruthy()
+        expect(post).toHaveProperty('userId')
+        expect(post.userId).toBe(reqBody.user_id)
+        expect(post).toHaveProperty('user')
+        expect(post.createdAt).toBeTruthy()
         return null
       })
   })
