@@ -9,7 +9,12 @@ module.exports = {
 }
 
 function userExists (user, db = connection) {
-  // todo
+  return db('users')
+    .count('id as n')
+    .where('name', user)
+    .then(count => {
+      return count[0].n > 0
+    })
 }
 
 function getUserByName (user, db = connection) {
