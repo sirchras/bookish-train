@@ -44,15 +44,23 @@ describe('getUserByName', () => {
 
 describe('createUser', () => {
   it('returns the id of the new user', () => {
-    return db.createUser('pete', testDb)
-      .then(id => {
+    const user = {
+      name: 'pete',
+      password: 'pete'
+    }
+    return db.createUser(user, testDb)
+      .then(([id]) => {
         expect(id).toBe(3)
         return null
       })
   })
 
   it('throws an error if the user already exists', () => {
-    return expect(db.createUser('chris', testDb))
-      .rejects.toMatch('user already exists')
+    const user = {
+      name: 'chris',
+      password: 'chris'
+    }
+    return expect(db.createUser(user, testDb))
+      .rejects.toThrow('user already exists')
   })
 })
