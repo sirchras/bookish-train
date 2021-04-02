@@ -45,7 +45,7 @@ describe('getUserByName', () => {
 describe('createUser', () => {
   it('returns the id of the new user', () => {
     const user = {
-      name: 'pete',
+      username: 'pete',
       password: 'pete'
     }
     return db.createUser(user, testDb)
@@ -57,7 +57,7 @@ describe('createUser', () => {
 
   it('throws an error if the user already exists', () => {
     const user = {
-      name: 'chris',
+      username: 'chris',
       password: 'chris'
     }
     return expect(db.createUser(user, testDb))

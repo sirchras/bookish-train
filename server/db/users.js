@@ -25,7 +25,7 @@ function getUserByName (name, db = connection) {
 }
 
 function createUser (user, db = connection) {
-  const { name, password } = user
+  const { username: name, password } = user
   return userExists(name, db)
     .then(exists => {
       if (exists) throw new Error('user already exists')
