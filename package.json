@@ -48,6 +48,11 @@
       "bundle.js"
     ]
   },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom"
+    ]
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
