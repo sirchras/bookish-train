@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import NewPost from '../components/NewPost'
-import Feed from '../components/Feed'
+import NewPost from '../components/feed/NewPost'
+import Feed from '../components/feed/Feed'
 
 const Wrapper = styled.div`
   width: 100%;
