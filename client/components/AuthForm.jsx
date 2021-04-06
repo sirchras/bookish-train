@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { isAuthenticated } from 'authenticare/client'
 
 import { baseUrl } from '../config'
+import { setUser } from './userSlice'
 
 const defaultFormState = {
   username: '',
@@ -10,6 +12,7 @@ const defaultFormState = {
 }
 
 function AuthForm ({ name, action }) {
+  const dispatch = useDispatch()
   const history = useHistory()
   const [form, setForm] = useState(defaultFormState)
 
@@ -27,7 +30,10 @@ function AuthForm ({ name, action }) {
     const { username, password } = form
     action({ username, password }, { baseUrl })
       .then(() => {
-        if (isAuthenticated()) history.push('/')
+        if (isAuthenticated()) {
+          dispatch(setUser(username))
+          history.push('/')
+        }
         return null
       })
       .catch(console.error)
