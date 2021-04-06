@@ -1,19 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { register } from 'authenticare/client'
+
+import AuthForm from '../components/AuthForm'
 
 function Register () {
   return (
     <>
       <h1>Register</h1>
-      <form>
-        <label>Username:
-          <input required/>
-        </label>
-        <label>Password:
-          <input type='password' required/>
-        </label>
-        <button type='submit'>Register</button>
-      </form>
+      <AuthForm name='Register' action={register} />
       <p>
         Have an account already? <Link to='/signin'>Sign in here</Link>
       </p>
