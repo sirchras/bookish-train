@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { signIn } from 'authenticare/client'
+import { signIn } from '../components/userSlice'
 
 import AuthForm from '../components/AuthForm'
 
