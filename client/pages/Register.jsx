@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Register () {
   return (
     <>
-      <h1>register</h1>
+      <h1>Register</h1>
       <form>
         <label>Username:
           <input required/>
@@ -13,6 +14,9 @@ function Register () {
         </label>
         <button type='submit'>Register</button>
       </form>
+      <p>
+        Have an account already? <Link to='/signin'>Sign in here</Link>
+      </p>
     </>
   )
 }
