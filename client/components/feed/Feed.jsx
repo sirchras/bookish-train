@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import hash from 'hash-string'
 
-import { fetchPosts } from './postsSlice'
+import { fetchPosts } from '../postsSlice'
 import Post from './Post'
 
 function Feed () {
