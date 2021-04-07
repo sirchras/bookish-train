@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
+
 import { makePost } from './postsSlice'
 
 const Wrapper = styled.form`
   padding: 16px;
-  border-bottom: 1px solid hsl(200, 15%, 95%);
+  border-bottom: 1px solid hsl(200, 0%, 95%);
 `
 
 const Status = styled.textarea`
@@ -17,7 +18,7 @@ const Status = styled.textarea`
   border: 1px solid transparent;
   &:focus-visible {
     outline: none;
-    border-bottom: 1px solid hsl(200, 15%, 95%);
+    border-bottom: 1px solid hsl(200, 0%, 75%); //hsl(207, 60%, 52%)
   }
 `
 
